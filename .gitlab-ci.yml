@@ -1,11 +1,14 @@
 variables:
     GIT_SSL_NO_VERIFY: 1
-    
+
 deploy:
     environment:
         name: production
     stage: deploy
+    except:
+        - dev
     script:
         - gradle build
+        - gradle javadoc
         - gradle jar
         - gradle distZip
