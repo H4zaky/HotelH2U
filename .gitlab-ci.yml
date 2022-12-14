@@ -7,6 +7,13 @@ deploy:
     stage: deploy
     except:
         - dev
+    artifacts:
+        name: "$CI_COMMIT_REF_NAME"
+        paths:
+            - app/build/distributions
+            - app/build/docs/javadoc
+            - app/build/libs
+            - app/build/tests/test
     script:
         - gradle build
         - gradle javadoc
