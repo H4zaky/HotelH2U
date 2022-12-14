@@ -1,3 +1,6 @@
+variables:
+    GIT_SSL_NO_VERIFY: 1
+    
 job_test:
     image: gradle:6.3-jdk13
     environment: 
