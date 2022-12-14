@@ -1,0 +1,19 @@
+job_test:
+    image: gradle:6.3-jdk13
+    environment: 
+        name: testing
+    stage: test
+    script:
+        - gradle build
+        - gradle test
+        - gradle javadoc
+
+job_deploy:
+    image: gradle:6.3-jdk13
+    environment:
+        name: production
+    stage: deploy
+    script:
+        - gradle build
+        - gradle jar
+        - gradle distZip
