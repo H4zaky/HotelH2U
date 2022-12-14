@@ -28,3 +28,9 @@ application {
     // Define the main class for the application.
     mainClass = 'es2_groupbf.App'
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'es2_groupbf.App'
+    }
+}
