@@ -1,18 +1,7 @@
 variables:
     GIT_SSL_NO_VERIFY: 1
     
-job_test:
-    image: gradle:6.3-jdk13
-    environment: 
-        name: testing
-    stage: test
-    script:
-        - gradle build
-        - gradle test
-        - gradle javadoc
-
-job_deploy:
-    image: gradle:6.3-jdk13
+deploy:
     environment:
         name: production
     stage: deploy
