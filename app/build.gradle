@@ -7,21 +7,44 @@
  */
 
 plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+    // Generate IntelliJ IDEA project files
+    id 'idea'
+
+    // Performs quality checks on source files and generates reports
+    id 'pmd'
 }
+
+group 'es2_groupbf'
+version '1.0.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+
+    flatDir {
+        dirs 'lib'
+    }
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13.2'
-
     // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.0.1-jre'
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    // Use JUnit test framework.
+    // testImplementation 'junit:junit:4.13.2'
+
+    // Use JUnit test framework.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+
+    // Use OpenCSV csv parser.
+    implementation 'com.opencsv:opencsv:5.7.1'
 }
 
 application {
@@ -31,6 +54,25 @@ application {
 
 jar {
     manifest {
+        attributes 'Specification-Title': 'App - ESII'
+        attributes 'Specification-Version': '1.0'
+        attributes 'Specification-Vendor': 'Group BF'
+        attributes 'Implementation-Title': 'es2_groupbf.App'
+        attributes 'Implementation-Version': 'build01'
+        attributes 'Implementation-Vendor': 'Group BF'
         attributes 'Main-Class': 'es2_groupbf.App'
     }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pmd {
+    consoleOutput = true
+    toolVersion = "6.52.0"
+    rulesMinimumPriority = 5
+    reportsDir = file("${buildDir}/pmd-output")
+    ruleSetFiles = files("${projectDir}/config/pmd/rules.xml")
+    ruleSets = []
 }
