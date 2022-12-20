@@ -17,9 +17,7 @@ public class Util {
 
             String fileAbsolutePath = filePath.getFile();
 
-            File file = new File(fileAbsolutePath);
-
-            return file;
+            return new File(fileAbsolutePath);
         } catch (IOException exception) {
             exception.printStackTrace();
             return null;
