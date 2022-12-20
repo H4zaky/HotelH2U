@@ -41,7 +41,7 @@ public class OpenCSV {
 
             while (myTransactionIterator.hasNext()) {
                 Transaction myTransaction = myTransactionIterator.next();
-                System.out.println(myTransaction);
+                System.out.println(myTransaction.getId());
             }
 
             csvReader.close();
