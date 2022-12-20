@@ -16,6 +16,9 @@ plugins {
     // Generate IntelliJ IDEA project files
     id 'idea'
 
+    // Generates tests reports
+    id 'jacoco'
+
     // Performs quality checks on source files and generates reports
     id 'pmd'
 }
@@ -66,6 +69,21 @@ jar {
 
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('/jacoco-html')
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('/jacoco-out')
 }
 
 pmd {
