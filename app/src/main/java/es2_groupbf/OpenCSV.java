@@ -9,18 +9,18 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 public class OpenCSV {
-    private File file;
 
     public static List<Transaction> parseCSV() {
         try {
             File file = Util.getResourceFile("dataset-v2.csv");
 
             if (Objects.isNull(file)) {
-                throw new Exception("Something went wrong!");
+                throw new Exception("The application couldn't load the necessary data!");
             }
 
             CSVReader csvReader = new CSVReader(new FileReader(file));
@@ -37,9 +37,11 @@ public class OpenCSV {
                     .withSeparator(';')
                     .build();
 
-            for (Transaction myTransaction : csvToBean) {
-                System.out.println(myTransaction.toString());
-                transactions.add(myTransaction);
+            Iterator<Transaction> myTransactionIterator = csvToBean.iterator();
+
+            while (myTransactionIterator.hasNext()) {
+                Transaction myTransaction = myTransactionIterator.next();
+                System.out.println(myTransaction);
             }
 
             csvReader.close();
