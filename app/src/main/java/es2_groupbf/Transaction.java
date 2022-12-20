@@ -1,21 +1,25 @@
 package es2_groupbf;
 
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
+import es2_groupbf.converters.DateConverter;
+import es2_groupbf.converters.DoubleConverter;
+import es2_groupbf.converters.NullConverter;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Transaction {
-    @CsvBindByName(column = "ID")
-    private Long id;
+    @CsvCustomBindByName(column = "ID", converter = NullConverter.class)
+    private Integer id;
 
     @CsvBindByName(column = "Nationality")
     private String nationality;
 
-    @CsvBindByName(column = "Age")
+    @CsvCustomBindByName(column = "Age", converter = NullConverter.class)
     private Integer age;
 
-    @CsvBindByName(column = "DaysSinceCreation")
+    @CsvCustomBindByName(column = "DaysSinceCreation", converter = NullConverter.class)
     private Integer daysSinceCreation;
 
     @CsvBindByName(column = "NameHash")
@@ -24,31 +28,31 @@ public class Transaction {
     @CsvBindByName(column = "DocIDHash")
     private String docIdHash;
 
-    @CsvBindByName(column = "AverageLeadTime")
+    @CsvCustomBindByName(column = "AverageLeadTime", converter = NullConverter.class)
     private Integer averageLeadTime;
 
-    @CsvBindByName(column = "LodgingRevenue")
+    @CsvCustomBindByName(column = "LodgingRevenue", converter = DoubleConverter.class)
     private Double lodgingRevenue;
 
-    @CsvBindByName(column = "OtherRevenue")
+    @CsvCustomBindByName(column = "OtherRevenue", converter = DoubleConverter.class)
     private Double otherRevenue;
 
-    @CsvBindByName(column = "BookingsCanceled")
+    @CsvCustomBindByName(column = "BookingsCanceled", converter = NullConverter.class)
     private Integer bookingsCanceled;
 
-    @CsvBindByName(column = "BookingsCheckedIn")
+    @CsvCustomBindByName(column = "BookingsCheckedIn", converter = NullConverter.class)
     private Integer bookingsCheckedIn;
 
-    @CsvBindByName(column = "PersonsNights")
+    @CsvCustomBindByName(column = "PersonsNights", converter = NullConverter.class)
     private Integer personsNights;
 
-    @CsvBindByName(column = "RoomNights")
+    @CsvCustomBindByName(column = "RoomNights", converter = NullConverter.class)
     private Integer roomNights;
 
-    @CsvBindByName(column = "DaysSinceLastStay")
+    @CsvCustomBindByName(column = "DaysSinceLastStay", converter = NullConverter.class)
     private Integer daysSinceLastStay;
 
-    @CsvBindByName(column = "DaysSinceFirstStay")
+    @CsvCustomBindByName(column = "DaysSinceFirstStay", converter = NullConverter.class)
     private Integer daysSinceFirstStay;
 
     @CsvBindByName(column = "DistributionChannel")
@@ -57,16 +61,16 @@ public class Transaction {
     @CsvBindByName(column = "MarketSegment")
     private String marketSegment;
 
-    @CsvBindByName(column = "PurchaseDate")
+    @CsvCustomBindByName(column = "PurchaseDate", converter = DateConverter.class)
     private Date purchaseDate;
 
-    @CsvBindByName(column = "PaymentMethod")
+    @CsvCustomBindByName(column = "PaymentMethod", converter = NullConverter.class)
     private Integer paymentMethod;
 
     public Transaction() {
     }
 
-    public Transaction(Long id, String nationality, Integer age, Integer daysSinceCreation, String nameHash, String docIdHash, Integer averageLeadTime, Double lodgingRevenue, Double otherRevenue, Integer bookingsCanceled, Integer bookingsCheckedIn, Integer personsNights, Integer roomNights, Integer daysSinceLastStay, Integer daysSinceFirstStay, String distributionChannel, String marketSegment, Date purchaseDate, Integer paymentMethod) {
+    public Transaction(Integer id, String nationality, Integer age, Integer daysSinceCreation, String nameHash, String docIdHash, Integer averageLeadTime, Double lodgingRevenue, Double otherRevenue, Integer bookingsCanceled, Integer bookingsCheckedIn, Integer personsNights, Integer roomNights, Integer daysSinceLastStay, Integer daysSinceFirstStay, String distributionChannel, String marketSegment, Date purchaseDate, Integer paymentMethod) {
         this.id = id;
         this.nationality = nationality;
         this.age = age;
@@ -88,11 +92,11 @@ public class Transaction {
         this.paymentMethod = paymentMethod;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
