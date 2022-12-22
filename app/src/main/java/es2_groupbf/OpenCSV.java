@@ -7,17 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 public class OpenCSV {
-
     public static List<Transaction> parseCSV() {
         List<Transaction> transactions = new ArrayList<>();
 
         try {
-            File file = Util.getResourceFile("dataset-v2.csv");
+            File file = Util.getResourceFile("dataset.csv");
 
             if (Objects.isNull(file)) {
                 throw new Exception("The application couldn't load the necessary data!");
@@ -30,14 +28,10 @@ public class OpenCSV {
                     .withSeparator(';')
                     .build();
 
-            Iterator<Transaction> myTransactionIterator = csvToBean.iterator();
-
-            while (myTransactionIterator.hasNext()) {
-                Transaction myTransaction = myTransactionIterator.next();
-                System.out.println(myTransaction.toString());
+            for (Transaction myTransaction : csvToBean) {
                 transactions.add(myTransaction);
+                System.out.println(myTransaction.toString());
             }
-
         } catch (FileNotFoundException exception) {
             exception.printStackTrace();
         } catch (Exception exception) {
