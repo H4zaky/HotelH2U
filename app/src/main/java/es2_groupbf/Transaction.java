@@ -1,26 +1,21 @@
 package es2_groupbf;
 
 import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvCustomBindByName;
-import es2_groupbf.converters.DateConverter;
-import es2_groupbf.converters.DoubleConverter;
-import es2_groupbf.converters.NullConverter;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class Transaction {
-    @CsvCustomBindByName(column = "ID", converter = NullConverter.class)
-    private Integer id;
+    @CsvBindByName(column = "ID")
+    private String id;
 
     @CsvBindByName(column = "Nationality")
     private String nationality;
 
-    @CsvCustomBindByName(column = "Age", converter = NullConverter.class)
-    private Integer age;
+    @CsvBindByName(column = "Age")
+    private String age;
 
-    @CsvCustomBindByName(column = "DaysSinceCreation", converter = NullConverter.class)
-    private Integer daysSinceCreation;
+    @CsvBindByName(column = "DaysSinceCreation")
+    private String daysSinceCreation;
 
     @CsvBindByName(column = "NameHash")
     private String nameHash;
@@ -28,32 +23,32 @@ public class Transaction {
     @CsvBindByName(column = "DocIDHash")
     private String docIdHash;
 
-    @CsvCustomBindByName(column = "AverageLeadTime", converter = NullConverter.class)
-    private Integer averageLeadTime;
+    @CsvBindByName(column = "AverageLeadTime")
+    private String averageLeadTime;
 
-    @CsvCustomBindByName(column = "LodgingRevenue", converter = DoubleConverter.class)
-    private Double lodgingRevenue;
+    @CsvBindByName(column = "LodgingRevenue")
+    private String lodgingRevenue;
 
-    @CsvCustomBindByName(column = "OtherRevenue", converter = DoubleConverter.class)
-    private Double otherRevenue;
+    @CsvBindByName(column = "OtherRevenue")
+    private String otherRevenue;
 
-    @CsvCustomBindByName(column = "BookingsCanceled", converter = NullConverter.class)
-    private Integer bookingsCanceled;
+    @CsvBindByName(column = "BookingsCanceled")
+    private String bookingsCanceled;
 
-    @CsvCustomBindByName(column = "BookingsCheckedIn", converter = NullConverter.class)
-    private Integer bookingsCheckedIn;
+    @CsvBindByName(column = "BookingsCheckedIn")
+    private String bookingsCheckedIn;
 
-    @CsvCustomBindByName(column = "PersonsNights", converter = NullConverter.class)
-    private Integer personsNights;
+    @CsvBindByName(column = "PersonsNights")
+    private String personsNights;
 
-    @CsvCustomBindByName(column = "RoomNights", converter = NullConverter.class)
-    private Integer roomNights;
+    @CsvBindByName(column = "RoomNights")
+    private String roomNights;
 
-    @CsvCustomBindByName(column = "DaysSinceLastStay", converter = NullConverter.class)
-    private Integer daysSinceLastStay;
+    @CsvBindByName(column = "DaysSinceLastStay")
+    private String daysSinceLastStay;
 
-    @CsvCustomBindByName(column = "DaysSinceFirstStay", converter = NullConverter.class)
-    private Integer daysSinceFirstStay;
+    @CsvBindByName(column = "DaysSinceFirstStay")
+    private String daysSinceFirstStay;
 
     @CsvBindByName(column = "DistributionChannel")
     private String distributionChannel;
@@ -61,16 +56,16 @@ public class Transaction {
     @CsvBindByName(column = "MarketSegment")
     private String marketSegment;
 
-    @CsvCustomBindByName(column = "PurchaseDate", converter = DateConverter.class)
-    private Date purchaseDate;
+    @CsvBindByName(column = "PurchaseDate")
+    private String purchaseDate;
 
-    @CsvCustomBindByName(column = "PaymentMethod", converter = NullConverter.class)
-    private Integer paymentMethod;
+    @CsvBindByName(column = "PaymentMethod")
+    private String paymentMethod;
 
     public Transaction() {
     }
 
-    public Transaction(Integer id, String nationality, Integer age, Integer daysSinceCreation, String nameHash, String docIdHash, Integer averageLeadTime, Double lodgingRevenue, Double otherRevenue, Integer bookingsCanceled, Integer bookingsCheckedIn, Integer personsNights, Integer roomNights, Integer daysSinceLastStay, Integer daysSinceFirstStay, String distributionChannel, String marketSegment, Date purchaseDate, Integer paymentMethod) {
+    public Transaction(String id, String nationality, String age, String daysSinceCreation, String nameHash, String docIdHash, String averageLeadTime, String lodgingRevenue, String otherRevenue, String bookingsCanceled, String bookingsCheckedIn, String personsNights, String roomNights, String daysSinceLastStay, String daysSinceFirstStay, String distributionChannel, String marketSegment, String purchaseDate, String paymentMethod) {
         this.id = id;
         this.nationality = nationality;
         this.age = age;
@@ -92,11 +87,11 @@ public class Transaction {
         this.paymentMethod = paymentMethod;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -108,19 +103,19 @@ public class Transaction {
         this.nationality = nationality;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public Integer getDaysSinceCreation() {
+    public String getDaysSinceCreation() {
         return daysSinceCreation;
     }
 
-    public void setDaysSinceCreation(Integer daysSinceCreation) {
+    public void setDaysSinceCreation(String daysSinceCreation) {
         this.daysSinceCreation = daysSinceCreation;
     }
 
@@ -140,75 +135,75 @@ public class Transaction {
         this.docIdHash = docIdHash;
     }
 
-    public Integer getAverageLeadTime() {
+    public String getAverageLeadTime() {
         return averageLeadTime;
     }
 
-    public void setAverageLeadTime(Integer averageLeadTime) {
+    public void setAverageLeadTime(String averageLeadTime) {
         this.averageLeadTime = averageLeadTime;
     }
 
-    public Double getLodgingRevenue() {
+    public String getLodgingRevenue() {
         return lodgingRevenue;
     }
 
-    public void setLodgingRevenue(Double lodgingRevenue) {
+    public void setLodgingRevenue(String lodgingRevenue) {
         this.lodgingRevenue = lodgingRevenue;
     }
 
-    public Double getOtherRevenue() {
+    public String getOtherRevenue() {
         return otherRevenue;
     }
 
-    public void setOtherRevenue(Double otherRevenue) {
+    public void setOtherRevenue(String otherRevenue) {
         this.otherRevenue = otherRevenue;
     }
 
-    public Integer getBookingsCanceled() {
+    public String getBookingsCanceled() {
         return bookingsCanceled;
     }
 
-    public void setBookingsCanceled(Integer bookingsCanceled) {
+    public void setBookingsCanceled(String bookingsCanceled) {
         this.bookingsCanceled = bookingsCanceled;
     }
 
-    public Integer getBookingsCheckedIn() {
+    public String getBookingsCheckedIn() {
         return bookingsCheckedIn;
     }
 
-    public void setBookingsCheckedIn(Integer bookingsCheckedIn) {
+    public void setBookingsCheckedIn(String bookingsCheckedIn) {
         this.bookingsCheckedIn = bookingsCheckedIn;
     }
 
-    public Integer getPersonsNights() {
+    public String getPersonsNights() {
         return personsNights;
     }
 
-    public void setPersonsNights(Integer personsNights) {
+    public void setPersonsNights(String personsNights) {
         this.personsNights = personsNights;
     }
 
-    public Integer getRoomNights() {
+    public String getRoomNights() {
         return roomNights;
     }
 
-    public void setRoomNights(Integer roomNights) {
+    public void setRoomNights(String roomNights) {
         this.roomNights = roomNights;
     }
 
-    public Integer getDaysSinceLastStay() {
+    public String getDaysSinceLastStay() {
         return daysSinceLastStay;
     }
 
-    public void setDaysSinceLastStay(Integer daysSinceLastStay) {
+    public void setDaysSinceLastStay(String daysSinceLastStay) {
         this.daysSinceLastStay = daysSinceLastStay;
     }
 
-    public Integer getDaysSinceFirstStay() {
+    public String getDaysSinceFirstStay() {
         return daysSinceFirstStay;
     }
 
-    public void setDaysSinceFirstStay(Integer daysSinceFirstStay) {
+    public void setDaysSinceFirstStay(String daysSinceFirstStay) {
         this.daysSinceFirstStay = daysSinceFirstStay;
     }
 
@@ -228,19 +223,19 @@ public class Transaction {
         this.marketSegment = marketSegment;
     }
 
-    public Date getPurchaseDate() {
+    public String getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
+    public void setPurchaseDate(String purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public Integer getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(Integer paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -258,6 +253,26 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" + "id=" + id + ", nationality='" + nationality + '\'' + ", age=" + age + ", daysSinceCreation=" + daysSinceCreation + ", nameHash='" + nameHash + '\'' + ", docIdHash='" + docIdHash + '\'' + ", averageLeadTime=" + averageLeadTime + ", lodgingRevenue=" + lodgingRevenue + ", otherRevenue=" + otherRevenue + ", bookingsCanceled=" + bookingsCanceled + ", bookingsCheckedIn=" + bookingsCheckedIn + ", personsNights=" + personsNights + ", roomNights=" + roomNights + ", daysSinceLastStay=" + daysSinceLastStay + ", daysSinceFirstStay=" + daysSinceFirstStay + ", distributionChannel='" + distributionChannel + '\'' + ", marketSegment='" + marketSegment + '\'' + ", purchaseDate=" + purchaseDate + ", paymentMethod=" + paymentMethod + '}';
+        return "Transaction{" +
+                "id='" + id + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", age='" + age + '\'' +
+                ", daysSinceCreation='" + daysSinceCreation + '\'' +
+                ", nameHash='" + nameHash + '\'' +
+                ", docIdHash='" + docIdHash + '\'' +
+                ", averageLeadTime='" + averageLeadTime + '\'' +
+                ", lodgingRevenue='" + lodgingRevenue + '\'' +
+                ", otherRevenue='" + otherRevenue + '\'' +
+                ", bookingsCanceled='" + bookingsCanceled + '\'' +
+                ", bookingsCheckedIn='" + bookingsCheckedIn + '\'' +
+                ", personsNights='" + personsNights + '\'' +
+                ", roomNights='" + roomNights + '\'' +
+                ", daysSinceLastStay='" + daysSinceLastStay + '\'' +
+                ", daysSinceFirstStay='" + daysSinceFirstStay + '\'' +
+                ", distributionChannel='" + distributionChannel + '\'' +
+                ", marketSegment='" + marketSegment + '\'' +
+                ", purchaseDate='" + purchaseDate + '\'' +
+                ", paymentMethod='" + paymentMethod + '\'' +
+                '}';
     }
 }
