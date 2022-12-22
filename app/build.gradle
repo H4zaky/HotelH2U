@@ -77,13 +77,13 @@ jacocoTestReport {
     reports {
         xml.required = false
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('/jacoco-html')
+        html.outputLocation = layout.buildDirectory.dir('jacoco-html')
     }
 }
 
 jacoco {
     toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('/jacoco-out')
+    reportsDirectory = layout.buildDirectory.dir('jacoco-out') as Directory
 }
 
 pmd {
