@@ -40,14 +40,11 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
 
     // Use JUnit test framework.
-    // testImplementation 'junit:junit:4.13.2'
-
-    // Use JUnit test framework.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
     // Use OpenCSV csv parser.
-    implementation 'com.opencsv:opencsv:5.7.1'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
 }
 
 application {
@@ -72,25 +69,23 @@ test {
     finalizedBy jacocoTestReport
 }
 
+jacoco {
+    toolVersion = "0.8.8"
+}
+
 jacocoTestReport {
     dependsOn test
     reports {
         xml.required = false
         csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacoco-html')
+        html.outputLocation = file("${buildDir}/jacoco-output")
     }
-}
-
-jacoco {
-    toolVersion = "0.8.8"
-    reportsDirectory = layout.buildDirectory.dir('jacoco-out') as Directory
 }
 
 pmd {
     consoleOutput = true
+    ignoreFailures = true
     toolVersion = "6.52.0"
     rulesMinimumPriority = 5
     reportsDir = file("${buildDir}/pmd-output")
-    ruleSetFiles = files("${projectDir}/config/pmd/rules.xml")
-    ruleSets = []
 }
