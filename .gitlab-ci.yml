@@ -1,21 +1,56 @@
+image: gradle:alpine
+
+stages:
+  - build
+  - test
+  - deploy
+
 variables:
-    GIT_SSL_NO_VERIFY: 1
+  GIT_SSL_NO_VERIFY: 1
+
+before_script:
+  - echo "Start CI/CD"
+  - GRADLE_USER_HOME="$(pwd)/.gradle"
+  - export GRADLE_USER_HOME
+  - chmod +x ./gradlew
+
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+build:
+  stage: build
+  tags:
+    - estg
+  script:
+    - ./gradlew assemble
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
+
+test-unit:
+  stage: test
+  only:
+    - dev
+  tags:
+    - estg
+  script:
+    - ./gradlew test
+    - ./gradlew jacocoTestReport
+  artifacts:
+    paths:
+      - build/test-results/test/TEST-*.xml
+      - build/reports/jacoco*
 
 deploy:
-    environment:
-        name: production
-    stage: deploy
-    except:
-        - dev
-    artifacts:
-        name: "$CI_COMMIT_REF_NAME"
-        paths:
-            - app/build/distributions
-            - app/build/docs/javadoc
-            - app/build/libs
-            - app/build/tests/test
-    script:
-        - gradle build
-        - gradle javadoc
-        - gradle jar
-        - gradle distZip
+  stage: deploy
+  needs: [ test-unit ]
+  only:
+    - master
+  script:
+    - echo "Deploying..."
+
+after_script:
+  - echo "End CI/CD"
