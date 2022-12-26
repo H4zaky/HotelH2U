@@ -47,7 +47,8 @@ test-unit:
 deploy:
   stage: deploy
   needs: [test-unit]
-  only: master
+  only:
+    - master
   script:
     - echo "Deploying..."
 
