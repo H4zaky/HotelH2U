@@ -44,7 +44,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
     // Use OpenCSV csv parser.
-    implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
+    implementation 'com.opencsv:opencsv:5.7.1'
 }
 
 application {
@@ -67,6 +67,8 @@ jar {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    testLogging.showStandardStreams = true
+    testLogging.events("PASSED", "SKIPPED", "FAILED")
 }
 
 jacoco {
@@ -78,6 +80,7 @@ jacocoTestReport {
     reports {
         xml.required = false
         csv.required = false
+        html.required = true
         html.outputLocation = file("${buildDir}/jacoco-output")
     }
 }
