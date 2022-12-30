@@ -21,8 +21,6 @@ cache:
 
 build:
   stage: build
-  tags:
-    - estg
   script:
     - ./gradlew assemble
   artifacts:
@@ -34,8 +32,6 @@ test-unit:
   stage: test
   only:
     - dev
-  tags:
-    - estg
   script:
     - ./gradlew test
     - ./gradlew jacocoTestReport
