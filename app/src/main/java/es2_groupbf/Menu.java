@@ -34,10 +34,10 @@ public class Menu {
 
     private void displayOptions() {
         System.out.println("Please choose one of the following options:");
-        System.out.println("1) N/A");
-        System.out.println("2) N/A");
-        System.out.println("3) N/A");
-        System.out.println("0) Exit");
+        System.out.println("[1] N/A");
+        System.out.println("[2] N/A");
+        System.out.println("[3] N/A");
+        System.out.println("[0] Exit");
     }
 
     private void readOption() {
