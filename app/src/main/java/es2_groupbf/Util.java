@@ -2,25 +2,31 @@ package es2_groupbf;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
 public class Util {
-    public static File getResourceFile(String filename) {
-        try {
-            URL filePath = Util.class.getClassLoader().getResource(filename);
+    private static URL getFilePathFromResources(String fileName) {
+        return Util.class.getClassLoader().getResource(fileName);
+    }
 
-            if (Objects.isNull(filePath)) {
-                throw new FileNotFoundException();
-            }
+    private static String getAbsoluteFilePathFromResources(String fileName) throws FileNotFoundException {
+        URL filePath = getFilePathFromResources(fileName);
 
-            String fileAbsolutePath = filePath.getFile();
-
-            return new File(fileAbsolutePath);
-        } catch (IOException exception) {
-            exception.printStackTrace();
-            return null;
+        if (Objects.isNull(filePath)) {
+            throw new FileNotFoundException("The following file was not found -> " + fileName);
         }
+
+        return filePath.getPath();
+    }
+
+    public static File getFileFromResources(String fileName) throws FileNotFoundException {
+        String absoluteFilePath = getAbsoluteFilePathFromResources(fileName);
+
+        if (Objects.isNull(absoluteFilePath)) {
+            throw new FileNotFoundException("The following file was not found -> " + fileName);
+        }
+
+        return new File(absoluteFilePath);
     }
 }
