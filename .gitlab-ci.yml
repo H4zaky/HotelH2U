@@ -51,8 +51,6 @@ deploy:
 after_script:
   - echo "End CI/CD"
 
-# Ignore merged yaml jobs
-
 build-job:
   only:
     - none
