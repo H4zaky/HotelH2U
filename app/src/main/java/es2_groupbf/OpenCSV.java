@@ -2,6 +2,7 @@ package es2_groupbf;
 
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
+import es2_groupbf.entities.Transaction;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpenCSV {
-    public OpenCSV() {
-    }
-
     public static List<Transaction> loadData(String filename) throws FileNotFoundException {
         List<Transaction> transactions = new ArrayList<>();
 
