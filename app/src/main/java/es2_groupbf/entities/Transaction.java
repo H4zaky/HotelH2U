@@ -50,6 +50,9 @@ public class Transaction {
     @CsvCustomBindByName(column = "PaymentMethod", converter = PaymentMethodConverter.class)
     private Integer paymentMethod;
 
+    public Transaction() {
+    }
+
     public Transaction(Integer id, String nationality, Integer age, Integer daysSinceCreation, String nameHash, String docIdHash, Integer averageLeadTime, Double lodgingRevenue, Double otherRevenue, Integer bookingsCanceled, Integer bookingsCheckedIn, Integer personsNights, Integer roomNights, Integer daysSinceLastStay, Integer daysSinceFirstStay, String distributionChannel, String marketSegment, Date purchaseDate, Integer paymentMethod) {
         this.id = id;
         this.nationality = nationality;
