@@ -1,7 +1,5 @@
 # ESII - Engenharia de Software II
 
----
-
 Este é um projeto de avaliação da unidade curricular ESII.
 
 ## Hotel H2U Avaliação de Clientes
