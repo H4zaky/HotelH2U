@@ -29,22 +29,18 @@ version '1.0.0'
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
-
-    flatDir {
-        dirs 'lib'
-    }
 }
 
 dependencies {
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.1-jre'
-
     // Use JUnit test framework.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
     // Use OpenCSV csv parser.
     implementation 'com.opencsv:opencsv:5.7.1'
+
+    // Use ProgressBar loading bar.
+    implementation 'me.tongfei:progressbar:0.9.5'
 }
 
 application {
@@ -54,12 +50,12 @@ application {
 
 jar {
     manifest {
-        attributes 'Specification-Title': 'App - ESII'
-        attributes 'Specification-Version': '1.0'
-        attributes 'Specification-Vendor': 'Group BF'
+        attributes 'Specification-Title': 'Hotel H2U'
+        attributes 'Specification-Version': getArchiveVersion()
+        attributes 'Specification-Vendor': 'ES2_Group_BF'
         attributes 'Implementation-Title': 'es2_groupbf.App'
-        attributes 'Implementation-Version': 'build01'
-        attributes 'Implementation-Vendor': 'Group BF'
+        attributes 'Implementation-Version': 'build'
+        attributes 'Implementation-Vendor': 'ES2_Group_BF'
         attributes 'Main-Class': 'es2_groupbf.App'
     }
 }
@@ -79,7 +75,7 @@ jacocoTestReport {
     dependsOn test
     reports {
         xml.required = false
-        csv.required = false
+        csv.required = true
         html.required = true
         html.outputLocation = file("${buildDir}/jacoco-output")
     }
@@ -91,4 +87,6 @@ pmd {
     toolVersion = "6.52.0"
     rulesMinimumPriority = 5
     reportsDir = file("${buildDir}/pmd-output")
+    ruleSetFiles = files("${rootDir}/config/pmd/custom-ruleset.xml")
+    ruleSets = []
 }
