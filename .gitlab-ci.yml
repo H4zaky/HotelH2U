@@ -19,34 +19,52 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
+assemble:
+  stage: build
+  except:
+    - main
+  script:
+    - ./gradlew --build-cache assemble
+
 build:
   stage: build
+  only:
+    - main
   script:
-    - ./gradlew assemble
+    - ./gradlew --build-cache build
   artifacts:
     paths:
-      - build/libs/*.jar
+      - build/artifacts
     expire_in: 1 week
 
-test-unit:
+test:
   stage: test
-  only:
-    - dev
   script:
     - ./gradlew test
-    - ./gradlew jacocoTestReport
-  artifacts:
-    paths:
-      - build/test-results/test/TEST-*.xml
-      - build/reports/jacoco*
 
 deploy:
   stage: deploy
-  needs: [ test-unit ]
+  needs: [test]
   only:
-    - master
+    - main
   script:
     - echo "Deploying..."
 
 after_script:
   - echo "End CI/CD"
+
+build-job:
+  only:
+    - none
+
+unit-test-job:
+  only:
+    - none
+
+lint-test-job:
+  only:
+    - none
+
+deploy-job:
+  only:
+    - none
