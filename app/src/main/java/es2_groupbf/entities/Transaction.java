@@ -1,12 +1,11 @@
-package es2_groupbf;
+package es2_groupbf.entities;
 
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
-import com.opencsv.bean.validators.MustMatchRegexExpression;
-import com.opencsv.bean.validators.PreAssignmentValidator;
 import es2_groupbf.converters.DateConverter;
 import es2_groupbf.converters.DoubleConverter;
 import es2_groupbf.converters.NullConverter;
+import es2_groupbf.converters.PaymentMethodConverter;
 
 import java.util.Date;
 import java.util.Objects;
@@ -48,8 +47,7 @@ public class Transaction {
     private String marketSegment;
     @CsvCustomBindByName(column = "PurchaseDate", converter = DateConverter.class)
     private Date purchaseDate;
-    @PreAssignmentValidator(validator = MustMatchRegexExpression.class, paramString = "^[1-4]{1}$")
-    @CsvCustomBindByName(column = "PaymentMethod", converter = NullConverter.class)
+    @CsvCustomBindByName(column = "PaymentMethod", converter = PaymentMethodConverter.class)
     private Integer paymentMethod;
 
     public Transaction() {

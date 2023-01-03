@@ -1,5 +1,6 @@
 package es2_groupbf;
 
+import es2_groupbf.entities.Transaction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,7 +39,7 @@ public class TransactionTest {
         } catch (ParseException exception) {
             exception.printStackTrace();
         }
-        
+
         Date finalDate = date;
 
         Assertions.assertAll("Regular get value should work",
