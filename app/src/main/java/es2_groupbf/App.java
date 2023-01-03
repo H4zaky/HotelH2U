@@ -16,8 +16,14 @@ public class App {
         List<Transaction> transactionsList = new ArrayList<>();
         HashMap<String, List<Transaction>> clientsMap = new HashMap<>();
         List<Client> clientsList = new ArrayList<>();
+        ProgressBar pb = new ProgressBarBuilder()
+                .setInitialMax(100)
+                .setStyle(ProgressBarStyle.ASCII)
+                .setTaskName("Loading")
+                .clearDisplayOnFinish()
+                .build();
 
-        try (ProgressBar pb = new ProgressBarBuilder().setInitialMax(100).setStyle(ProgressBarStyle.ASCII).setTaskName("Loading").build()) {
+        try {
             transactionsList = OpenCSV.loadData("dataset.csv");
 
             for (Transaction transaction : transactionsList) {

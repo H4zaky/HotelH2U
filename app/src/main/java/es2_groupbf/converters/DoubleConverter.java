@@ -7,6 +7,6 @@ import com.opencsv.exceptions.CsvDataTypeMismatchException;
 public class DoubleConverter extends AbstractBeanField {
     @Override
     protected Object convert(String value) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
-        return Double.parseDouble(value.replace(',', '.'));
+        return (value.equalsIgnoreCase("NULL")) ? null : Double.parseDouble(value.replace(',', '.'));
     }
 }
