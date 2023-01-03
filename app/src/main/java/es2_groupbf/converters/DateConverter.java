@@ -10,11 +10,11 @@ import java.text.SimpleDateFormat;
 public class DateConverter extends AbstractBeanField {
     @Override
     protected Object convert(String value) throws CsvDataTypeMismatchException, CsvConstraintViolationException {
+        if (value.equalsIgnoreCase("NULL")) return null;
         try {
             return new SimpleDateFormat("dd/MM/yy").parse(value);
-        } catch (ParseException exception) {
-            exception.printStackTrace();
-            return null;
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 }
