@@ -1,9 +1,5 @@
 package es2_groupbf.entities;
 
-import es2_groupbf.segmentation.indicators.MonetizationIndicator;
-import es2_groupbf.segmentation.indicators.RegularityIndicator;
-import es2_groupbf.segmentation.indicators.TotalPurchasesIndicator;
-
 import java.util.List;
 import java.util.Objects;
 
