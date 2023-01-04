@@ -45,11 +45,21 @@ public class Menu {
         int option;
 
         System.out.println("Your option -> ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Please enter a valid option.");
+            System.out.println("Your option -> ");
+            scanner.next();
+        }
         option = scanner.nextInt();
 
         while (option < 0 || option > 3) {
             System.out.println("Please enter a valid option.");
             System.out.println("Your option -> ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Please enter a valid option.");
+                System.out.println("Your option -> ");
+                scanner.next();
+            }
             option = scanner.nextInt();
         }
 
