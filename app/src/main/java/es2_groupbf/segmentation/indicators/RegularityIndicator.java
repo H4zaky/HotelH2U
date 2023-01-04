@@ -13,9 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class RegularityIndicator {
     public Integer calculate(Iterable<Transaction> transactions) throws ParseException {
-        Date purchaseDate = null, todayDate = null;
-
-        todayDate = Util.formatDate(new Date());
+        Date purchaseDate = transactions.iterator().next().getPurchaseDate(), todayDate = new Date();
 
         for (Transaction transaction : transactions) {
             if (transaction.getPurchaseDate().after(purchaseDate)) {
@@ -25,7 +23,7 @@ public class RegularityIndicator {
             }
         }
 
-        if (Objects.isNull(todayDate) || Objects.isNull(purchaseDate)) return 0;
+        if (Objects.isNull(purchaseDate)) return 0;
 
         return (int) ((todayDate.getTime() - purchaseDate.getTime()) / (1000 * 60 * 60 * 24));
     }
