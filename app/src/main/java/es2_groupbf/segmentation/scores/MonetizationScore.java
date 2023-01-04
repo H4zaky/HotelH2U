@@ -14,11 +14,7 @@ public class MonetizationScore {
     public void calculate(List<Client> clients) {
         int q1, q2, q3, q4;
 
-        System.out.println("Before sort!");
-        System.out.println(clients);
         clients = sort(clients);
-        System.out.println("After sort!");
-        System.out.println(clients);
 
         q1 = clients.size() / 4 - 1;
         q2 = clients.size() / 2 - 1;
