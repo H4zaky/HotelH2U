@@ -20,11 +20,10 @@ public class MonetizationScore {
         System.out.println("After sort!");
         System.out.println(clients);
 
-        //  size = 20
-        q1 = clients.size() / 4 - 1; // 0 - 4
-        q2 = clients.size() / 2 - 1; // 5 - 9
-        q3 = q1 + q2 + 1; // 10 - 14
-        q4 = clients.size() - 1; // 15 - 19
+        q1 = clients.size() / 4 - 1;
+        q2 = clients.size() / 2 - 1;
+        q3 = q1 + q2 + 1;
+        q4 = clients.size() - 1;
 
         for (int i = 0; i <= q1; i++) clients.get(i).setMonetizationScore(1);
         for (int i = 0; i <= q2; i++) clients.get(i).setMonetizationScore(2);
