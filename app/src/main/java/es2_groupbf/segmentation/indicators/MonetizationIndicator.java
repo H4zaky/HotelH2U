@@ -11,7 +11,6 @@ public class MonetizationIndicator {
         for (Transaction transaction : transactions) {
             Double lodgingRevenue = transaction.getLodgingRevenue();
             Double otherRevenue = transaction.getOtherRevenue();
-
             sum += (lodgingRevenue == null ? 0 : lodgingRevenue) + (otherRevenue == null ? 0 : otherRevenue);
         }
 

@@ -90,3 +90,7 @@ pmd {
     ruleSetFiles = files("${rootDir}/config/pmd/custom-ruleset.xml")
     ruleSets = []
 }
+
+javadoc {
+    source = sourceSets.main.allJava
+}

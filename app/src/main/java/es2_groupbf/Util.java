@@ -3,6 +3,10 @@ package es2_groupbf;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Util {
@@ -28,5 +32,9 @@ public class Util {
         }
 
         return new File(absoluteFilePath);
+    }
+
+    public static Date formatDate(String date) throws ParseException {
+        return new SimpleDateFormat("dd/MM/yy").parse((date));
     }
 }
