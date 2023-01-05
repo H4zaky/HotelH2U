@@ -7,6 +7,7 @@ import es2_groupbf.entities.Transaction;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,15 +17,17 @@ public class OpenCSV {
 
         File file = Util.getFileFromResources(filename);
 
-        FileReader reader = new FileReader(file);
+        try(FileReader reader = new FileReader(file)) {
+            CsvToBean<Transaction> csvToBean = new CsvToBeanBuilder<Transaction>(reader)
+                    .withType(Transaction.class)
+                    .withSeparator(';')
+                    .build();
 
-        CsvToBean<Transaction> csvToBean = new CsvToBeanBuilder<Transaction>(reader)
-                .withType(Transaction.class)
-                .withSeparator(';')
-                .build();
-
-        for (Transaction myTransaction : csvToBean) {
-            transactions.add(myTransaction);
+            for (Transaction myTransaction : csvToBean) {
+                transactions.add(myTransaction);
+            }
+        } catch (IOException exception) {
+            throw new FileNotFoundException("Error reading file: " + exception.getMessage());
         }
 
         return transactions;
