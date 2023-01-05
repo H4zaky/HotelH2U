@@ -12,14 +12,13 @@ public class TotalPurchasesScore {
     }
 
     public void calculate(List<Client> clients) {
-        int q1, q2, q3, q4;
-
         clients = sort(clients);
 
-        q1 = clients.size() / 4 - 1;
-        q2 = clients.size() / 2 - 1;
-        q3 = q1 + q2 + 1;
-        q4 = clients.size() - 1;
+        int numberClients = clients.size();
+        int q1 = numberClients / 4 - 1;
+        int q2 = numberClients / 2 - 1;
+        int q3 = q1 + q2 + 1;
+        int q4 = numberClients - 1;
 
         for (int i = 0; i <= q1; i++) clients.get(i).setTotalPurchasesScore(1);
         for (int i = 0; i <= q2; i++) clients.get(i).setTotalPurchasesScore(2);
