@@ -1,5 +1,6 @@
 package es2_groupbf;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -42,15 +43,18 @@ public class Menu {
 
     private void readOption() {
         Scanner scanner = new Scanner(System.in);
-        int option;
+        int option = 0;
 
-        System.out.println("Your option -> ");
-        while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a valid option.");
-            System.out.println("Your option -> ");
-            scanner.next();
+        while (true) {
+            try {
+                System.out.println("Your option -> ");
+                option = scanner.nextInt();
+                break;
+            } catch (InputMismatchException exception) {
+                System.out.println("Please enter a valid option (0-3).");
+                scanner.nextLine();
+            }
         }
-        option = scanner.nextInt();
 
         while (option < 0 || option > 3) {
             System.out.println("Please enter a valid option.");
@@ -66,7 +70,7 @@ public class Menu {
         setOption(option);
     }
 
-    private void performAction() {
+    protected void performAction() {
         switch (this.option) {
             case 0:
                 setExit(true);

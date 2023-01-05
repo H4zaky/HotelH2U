@@ -20,48 +20,107 @@ public class TransactionTest {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
         try {
-            date = dateFormat.parse("13/12/2022");
-        } catch (ParseException exception) {
-            exception.printStackTrace();
-        }
-
-        transaction = new Transaction(1, "PRT", 18, 1024, "82a3537ff0dbce7eec35d69edc3a189ee6f17d82f353a553f9aa96cb0be3ce89", "139d544b821b13ebea14f1b0fe18577222e415c2966e3a3511c4196055232202", 15, 300.50, 150.35, 1, 15, 2, 7, 7, 1012, "Direct", "Direct", date, 3);
-    }
-
-    @Test
-    @DisplayName("Getting Transaction values")
-    void groupedAssertions() {
-        Date date = null;
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
-
-        try {
-            date = dateFormat.parse("13/12/2022");
+            date = dateFormat.parse("23/05/18");
         } catch (ParseException exception) {
             exception.printStackTrace();
         }
 
         Date finalDate = date;
 
-        Assertions.assertAll("Regular get value should work",
+        transaction = new Transaction();
+        transaction.setId(1);
+        transaction.setNationality("PRT");
+        transaction.setAge(51);
+        transaction.setDaysSinceCreation(150);
+        transaction.setNameHash("0x8E0A7AF39B633D5EA25C3B7EF4DFC5464B36DB7AF375716EB065E29697CC071E");
+        transaction.setDocIdHash("0x71568459B729F7A7ABBED6C781A84CA4274D571003ACC7A4A791C3350D924137");
+        transaction.setAverageLeadTime(45);
+        transaction.setLodgingRevenue(371.0);
+        transaction.setOtherRevenue(105.3);
+        transaction.setBookingsCanceled(1);
+        transaction.setBookingsCheckedIn(3);
+        transaction.setPersonsNights(8);
+        transaction.setRoomNights(5);
+        transaction.setDaysSinceLastStay(151);
+        transaction.setDaysSinceFirstStay(1074);
+        transaction.setDistributionChannel("Corporate");
+        transaction.setMarketSegment("Corporate");
+        transaction.setPurchaseDate(finalDate);
+        transaction.setPaymentMethod(1);
+    }
+
+    @Test
+    @DisplayName("Test getters and setters")
+    void testGettersSetters() {
+        Date date = null;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+
+        try {
+            date = dateFormat.parse("23/05/18");
+        } catch (ParseException exception) {
+            exception.printStackTrace();
+        }
+
+        Date finalDate = date;
+
+        transaction.setId(1);
+        transaction.setNationality("PRT");
+        transaction.setAge(51);
+        transaction.setDaysSinceCreation(150);
+        transaction.setNameHash("0x8E0A7AF39B633D5EA25C3B7EF4DFC5464B36DB7AF375716EB065E29697CC071E");
+        transaction.setDocIdHash("0x71568459B729F7A7ABBED6C781A84CA4274D571003ACC7A4A791C3350D924137");
+        transaction.setAverageLeadTime(45);
+        transaction.setLodgingRevenue(371.0);
+        transaction.setOtherRevenue(105.3);
+        transaction.setBookingsCanceled(1);
+        transaction.setBookingsCheckedIn(3);
+        transaction.setPersonsNights(8);
+        transaction.setRoomNights(5);
+        transaction.setDaysSinceLastStay(151);
+        transaction.setDaysSinceFirstStay(1074);
+        transaction.setDistributionChannel("Corporate");
+        transaction.setMarketSegment("Corporate");
+        transaction.setPurchaseDate(finalDate);
+        transaction.setPaymentMethod(1);
+
+        Assertions.assertAll(
                 () -> Assertions.assertEquals(1, transaction.getId()),
                 () -> Assertions.assertEquals("PRT", transaction.getNationality()),
-                () -> Assertions.assertEquals(18, transaction.getAge()),
-                () -> Assertions.assertEquals(1024, transaction.getDaysSinceCreation()),
-                () -> Assertions.assertEquals("82a3537ff0dbce7eec35d69edc3a189ee6f17d82f353a553f9aa96cb0be3ce89", transaction.getNameHash()),
-                () -> Assertions.assertEquals("139d544b821b13ebea14f1b0fe18577222e415c2966e3a3511c4196055232202", transaction.getDocIdHash()),
-                () -> Assertions.assertEquals(15, transaction.getAverageLeadTime()),
-                () -> Assertions.assertEquals(300.50, transaction.getLodgingRevenue()),
-                () -> Assertions.assertEquals(150.35, transaction.getOtherRevenue()),
+                () -> Assertions.assertEquals(51, transaction.getAge()),
+                () -> Assertions.assertEquals(150, transaction.getDaysSinceCreation()),
+                () -> Assertions.assertEquals("0x8E0A7AF39B633D5EA25C3B7EF4DFC5464B36DB7AF375716EB065E29697CC071E", transaction.getNameHash()),
+                () -> Assertions.assertEquals("0x71568459B729F7A7ABBED6C781A84CA4274D571003ACC7A4A791C3350D924137", transaction.getDocIdHash()),
+                () -> Assertions.assertEquals(45, transaction.getAverageLeadTime()),
+                () -> Assertions.assertEquals(371.0, transaction.getLodgingRevenue()),
+                () -> Assertions.assertEquals(105.3, transaction.getOtherRevenue()),
                 () -> Assertions.assertEquals(1, transaction.getBookingsCanceled()),
-                () -> Assertions.assertEquals(15, transaction.getBookingsCheckedIn()),
-                () -> Assertions.assertEquals(2, transaction.getPersonsNights()),
-                () -> Assertions.assertEquals(7, transaction.getRoomNights()),
-                () -> Assertions.assertEquals(7, transaction.getDaysSinceLastStay()),
-                () -> Assertions.assertEquals(1012, transaction.getDaysSinceFirstStay()),
-                () -> Assertions.assertEquals("Direct", transaction.getDistributionChannel()),
-                () -> Assertions.assertEquals("Direct", transaction.getMarketSegment()),
+                () -> Assertions.assertEquals(3, transaction.getBookingsCheckedIn()),
+                () -> Assertions.assertEquals(8, transaction.getPersonsNights()),
+                () -> Assertions.assertEquals(5, transaction.getRoomNights()),
+                () -> Assertions.assertEquals(151, transaction.getDaysSinceLastStay()),
+                () -> Assertions.assertEquals(1074, transaction.getDaysSinceFirstStay()),
+                () -> Assertions.assertEquals("Corporate", transaction.getDistributionChannel()),
+                () -> Assertions.assertEquals("Corporate", transaction.getMarketSegment()),
                 () -> Assertions.assertEquals(finalDate, transaction.getPurchaseDate()),
-                () -> Assertions.assertEquals(3, transaction.getPaymentMethod())
+                () -> Assertions.assertEquals(1, transaction.getPaymentMethod())
         );
+    }
+
+    @Test
+    @DisplayName("Test toString method")
+    void testToString() {
+        String expected = "Transaction{id=1, nationality='PRT', age=51, daysSinceCreation=150, nameHash='0x8E0A7AF39B633D5EA25C3B7EF4DFC5464B36DB7AF375716EB065E29697CC071E', docIdHash='0x71568459B729F7A7ABBED6C781A84CA4274D571003ACC7A4A791C3350D924137', averageLeadTime=45, lodgingRevenue=371.0, otherRevenue=105.3, bookingsCanceled=1, bookingsCheckedIn=3, personsNights=8, roomNights=5, daysSinceLastStay=151, daysSinceFirstStay=1074, distributionChannel='Corporate', marketSegment='Corporate', purchaseDate=Wed May 23 00:00:00 WEST 2018, paymentMethod=1}";
+        Assertions.assertEquals(expected, transaction.toString());
+    }
+
+    @Test
+    @DisplayName("Test equals method")
+    void testEquals() {
+        Transaction transaction1 = transaction;
+        Transaction transaction2 = transaction;
+        Transaction transaction3 = null;
+
+        Assertions.assertTrue(transaction1.equals(transaction2));
+        Assertions.assertFalse(transaction1.equals(transaction3));
     }
 }

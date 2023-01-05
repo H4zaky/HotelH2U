@@ -10,22 +10,21 @@ import java.util.Locale;
 import java.util.Objects;
 
 public class Util {
-    private static URL getFilePathFromResources(String fileName) {
+    private static URL getFileURLFromResources(String fileName) {
         return Util.class.getClassLoader().getResource(fileName);
     }
 
-    private static String getAbsoluteFilePathFromResources(String fileName) throws FileNotFoundException {
-        URL filePath = getFilePathFromResources(fileName);
-
-        if (Objects.isNull(filePath)) {
-            throw new FileNotFoundException("The following file was not found -> " + fileName);
+    private static String getAbsoluteFilePathFromURL(URL fileURL) throws FileNotFoundException {
+        if (Objects.isNull(fileURL)) {
+            throw new FileNotFoundException("File not found!");
         }
 
-        return filePath.getPath();
+        return fileURL.getPath();
     }
 
     public static File getFileFromResources(String fileName) throws FileNotFoundException {
-        String absoluteFilePath = getAbsoluteFilePathFromResources(fileName);
+        URL fileURL = getFileURLFromResources(fileName);
+        String absoluteFilePath = getAbsoluteFilePathFromURL(fileURL);
 
         if (Objects.isNull(absoluteFilePath)) {
             throw new FileNotFoundException("The following file was not found -> " + fileName);
