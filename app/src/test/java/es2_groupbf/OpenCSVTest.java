@@ -13,6 +13,10 @@ import java.util.Date;
 import java.util.List;
 
 public class OpenCSVTest {
+    private static final String TEST_FILE_NAME = "dataset.csv";
+    private static final String TEST_EMPTY_FILE_NAME = "empty.csv";
+    private static final String NON_EXISTENT_FILE_NAME = "invalid_filename.csv";
+
     @Test
     @DisplayName("Test loadData method with valid file")
     void testLoadData() throws Exception {
@@ -56,19 +60,19 @@ public class OpenCSVTest {
     @Test
     @DisplayName("Test loadData method with valid file")
     void testLoadData_ValidFile() {
-        Assertions.assertDoesNotThrow(() -> OpenCSV.loadData("dataset.csv"));
+        Assertions.assertDoesNotThrow(() -> OpenCSV.loadData(TEST_FILE_NAME));
     }
 
     @Test
     @DisplayName("Test loadData method with file not found")
     void testLoadData_FileNotFound() {
-        Assertions.assertThrows(FileNotFoundException.class, () -> OpenCSV.loadData("invalid_filename.csv"));
+        Assertions.assertThrows(FileNotFoundException.class, () -> OpenCSV.loadData(NON_EXISTENT_FILE_NAME));
     }
 
     @Test
     @DisplayName("Test loadData method with empty file")
     void testLoadData_EmptyFile() throws Exception {
-        List<Transaction> transactions = OpenCSV.loadData("empty.csv");
+        List<Transaction> transactions = OpenCSV.loadData(TEST_EMPTY_FILE_NAME);
         Assertions.assertEquals(0, transactions.size());
     }
 }
