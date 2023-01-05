@@ -14,8 +14,8 @@ public class DateConverter extends AbstractBeanField {
         if (value.equalsIgnoreCase("NULL")) return null;
         try {
             return Util.formatDate(value);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (ParseException exception) {
+            throw new RuntimeException(exception);
         }
     }
 }
