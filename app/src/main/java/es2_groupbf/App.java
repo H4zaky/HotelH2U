@@ -12,6 +12,8 @@ import me.tongfei.progressbar.ProgressBar;
 import me.tongfei.progressbar.ProgressBarBuilder;
 import me.tongfei.progressbar.ProgressBarStyle;
 
+import java.io.FileNotFoundException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,43 +21,56 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
-        List<Transaction> transactionsList = new ArrayList<>();
-        HashMap<String, List<Transaction>> clientsMap = new HashMap<>();
-        List<Client> clientsList = new ArrayList<>();
-        ProgressBar pb = new ProgressBarBuilder().setInitialMax(100).setStyle(ProgressBarStyle.ASCII).setTaskName("Loading").clearDisplayOnFinish().build();
-
         try {
-            transactionsList = OpenCSV.loadData("dataset.csv");
+            List<Transaction> transactions = loadTransactionsFromCSV();
 
-            for (Transaction transaction : transactionsList) {
-                clientsMap.putIfAbsent(transaction.getDocIdHash(), new ArrayList<>());
-                clientsMap.get(transaction.getDocIdHash()).add(transaction);
-                pb.step();
-                pb.setExtraMessage("\n");
-            }
+            List<Client> clients = createClientsFromTransactions(transactions);
 
-            for (Map.Entry<String, List<Transaction>> entry : clientsMap.entrySet()) {
-                String key = entry.getKey();
-                List<Transaction> value = entry.getValue();
-                clientsList.add(new Client(key, value));
-            }
+            setIndicatorsForClients(clients);
 
-            for (Client client : clientsList) {
-                client.setMonetization(new MonetizationIndicator().calculate(client.getTransactions()));
-                client.setRegularity(new RegularityIndicator().calculate(client.getTransactions()));
-                client.setTotalPurchases(new TotalPurchasesIndicator().calculate(client.getTransactions()));
-            }
-
-            new MonetizationScore().calculate(clientsList);
-            new RegularityScore().calculate(clientsList);
-            new TotalPurchasesScore().calculate(clientsList);
+            calculateScores(clients);
 
             Thread.sleep(2500);
 
-            Menu menu = new Menu();
-            menu.run();
+            new Menu().run();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
+    }
+
+    private static List<Transaction> loadTransactionsFromCSV() throws FileNotFoundException {
+        return OpenCSV.loadData("dataset.csv");
+    }
+
+    private static List<Client> createClientsFromTransactions(List<Transaction> transactions) {
+        HashMap<String, List<Transaction>> clientsMap = new HashMap<>();
+        List<Client> clients = new ArrayList<>();
+
+        for (Transaction transaction : transactions) {
+            clientsMap.putIfAbsent(transaction.getDocIdHash(), new ArrayList<>());
+            clientsMap.get(transaction.getDocIdHash()).add(transaction);
+        }
+
+        for (Map.Entry<String, List<Transaction>> entry : clientsMap.entrySet()) {
+            String key = entry.getKey();
+            List<Transaction> value = entry.getValue();
+            clients.add(new Client(key, value));
+        }
+
+        return clients;
+    }
+
+    private static void setIndicatorsForClients(List<Client> clients) throws ParseException {
+        for (Client client : clients) {
+            client.setMonetization(new MonetizationIndicator().calculate(client.getTransactions()));
+            client.setRegularity(new RegularityIndicator().calculate(client.getTransactions()));
+            client.setTotalPurchases(new TotalPurchasesIndicator().calculate(client.getTransactions()));
+        }
+    }
+
+    private static void calculateScores(List<Client> clients) {
+        new MonetizationScore().calculate(clients);
+        new RegularityScore().calculate(clients);
+        new TotalPurchasesScore().calculate(clients);
     }
 }
