@@ -7,6 +7,8 @@ import es2_groupbf.converters.DoubleConverter;
 import es2_groupbf.converters.NullConverter;
 import es2_groupbf.converters.PaymentMethodConverter;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
 
@@ -225,6 +227,10 @@ public class Transaction {
 
     public void setPaymentMethod(Integer paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public LocalDate getDate() {
+        return purchaseDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     @Override
