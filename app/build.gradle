@@ -7,9 +7,24 @@
  */
 
 plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+    // Generate IntelliJ IDEA project files
+    id 'idea'
+
+    // Generates tests reports
+    id 'jacoco'
+
+    // Performs quality checks on source files and generates reports
+    id 'pmd'
 }
+
+group 'es2_groupbf'
+version '1.0.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -18,10 +33,14 @@ repositories {
 
 dependencies {
     // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
-    // This dependency is used by the application.
-    implementation 'com.google.guava:guava:31.0.1-jre'
+    // Use OpenCSV csv parser.
+    implementation 'com.opencsv:opencsv:5.7.1'
+
+    // Use ProgressBar loading bar.
+    implementation 'me.tongfei:progressbar:0.9.5'
 }
 
 application {
@@ -31,6 +50,47 @@ application {
 
 jar {
     manifest {
+        attributes 'Specification-Title': 'Hotel H2U'
+        attributes 'Specification-Version': getArchiveVersion()
+        attributes 'Specification-Vendor': 'ES2_Group_BF'
+        attributes 'Implementation-Title': 'es2_groupbf.App'
+        attributes 'Implementation-Version': 'build'
+        attributes 'Implementation-Vendor': 'ES2_Group_BF'
         attributes 'Main-Class': 'es2_groupbf.App'
     }
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+    testLogging.showStandardStreams = true
+    testLogging.events("PASSED", "SKIPPED", "FAILED")
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = false
+        csv.required = true
+        html.required = true
+        html.outputLocation = file("${buildDir}/jacoco-output")
+    }
+}
+
+pmd {
+    consoleOutput = true
+    ignoreFailures = true
+    toolVersion = "6.52.0"
+    rulesMinimumPriority = 5
+    reportsDir = file("${buildDir}/pmd-output")
+    ruleSetFiles = files("${rootDir}/config/pmd/custom-ruleset.xml")
+    ruleSets = []
+}
+
+javadoc {
+    source = sourceSets.main.allJava
 }
