@@ -1,13 +1,21 @@
-package es2_groupbf;
+package es2_groupbf.menus;
+
+import es2_groupbf.entities.Client;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
-public class Menu {
+public class MainMenu implements Menu {
     private int option;
     private boolean exit;
+    private List<Client> clients;
 
-    public Menu() {
+    public MainMenu() {
+    }
+
+    public MainMenu(List<Client> clients) {
+        this.clients = clients;
     }
 
     public int getOption() {
@@ -26,22 +34,24 @@ public class Menu {
         this.exit = exit;
     }
 
-    private void displayHeader() {
+    @Override
+    public void displayHeader() {
         System.out.println("+-----------------------------------+");
-        System.out.println("|           Welcome to the          |");
+        System.out.println("|             Main Menu             |");
         System.out.println("|       Hotel H2U Application       |");
         System.out.println("+-----------------------------------+");
     }
 
-    private void displayOptions() {
+    @Override
+    public void displayOptions() {
         System.out.println("Please choose one of the following options:");
-        System.out.println("[1] N/A");
-        System.out.println("[2] N/A");
-        System.out.println("[3] N/A");
+        System.out.println("[1] Segmentation");
+        System.out.println("[2] Statistics");
         System.out.println("[0] Exit");
     }
 
-    private void readOption() {
+    @Override
+    public void readOption() {
         Scanner scanner = new Scanner(System.in);
         int option = 0;
 
@@ -51,16 +61,16 @@ public class Menu {
                 option = scanner.nextInt();
                 break;
             } catch (InputMismatchException exception) {
-                System.out.println("Please enter a valid option (0-3).");
+                System.out.println("Please enter a valid option (0-2).");
                 scanner.nextLine();
             }
         }
 
-        while (option < 0 || option > 3) {
-            System.out.println("Please enter a valid option.");
+        while (option < 0 || option > 2) {
+            System.out.println("Please enter a valid option (0-2).");
             System.out.println("Your option -> ");
             while (!scanner.hasNextInt()) {
-                System.out.println("Please enter a valid option.");
+                System.out.println("Please enter a valid option (0-2).");
                 System.out.println("Your option -> ");
                 scanner.next();
             }
@@ -70,32 +80,33 @@ public class Menu {
         setOption(option);
     }
 
-    protected void performAction() {
+    @Override
+    public void handleOption() {
         switch (this.option) {
-            case 0:
+            case 0 -> {
                 setExit(true);
                 System.out.println("Thank you for using our application.");
-                break;
-            case 1:
-                System.out.println("Option 1!");
-                break;
-            case 2:
-                System.out.println("Option 2!");
-                break;
-            case 3:
-                System.out.println("Option 3!");
-                break;
-            default:
-                System.out.println("An unknown error has occurred. Please restart Hotel H2U Application, and try again.");
+            }
+            case 1 -> {
+                SegmentationMenu segmentationMenu = new SegmentationMenu(clients);
+                segmentationMenu.run();
+            }
+            case 2 -> {
+                StatisticsMenu statisticsMenu = new StatisticsMenu(clients);
+                statisticsMenu.run();
+            }
+            default ->
+                    System.out.println("An unknown error has occurred. Please restart Hotel H2U Application, and try again.");
         }
     }
 
+    @Override
     public void run() {
-        displayHeader();
         while (!exit) {
+            displayHeader();
             displayOptions();
             readOption();
-            performAction();
+            handleOption();
         }
     }
 }
