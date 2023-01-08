@@ -1,6 +1,10 @@
 package es2_groupbf.menus;
 
 import es2_groupbf.entities.Client;
+import es2_groupbf.menus.statistics.ClientScoreMenu;
+import es2_groupbf.menus.statistics.CommunicationChannelMenu;
+import es2_groupbf.menus.statistics.PaymentMethodMenu;
+import es2_groupbf.menus.statistics.SeasonalityMenu;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -64,16 +68,20 @@ public class StatisticsMenu extends MainMenu {
         switch (getOption()) {
             case 0 -> setExit(true);
             case 1 -> {
-                System.out.println("Option 1!");
+                SeasonalityMenu seasonalityMenu = new SeasonalityMenu(clients);
+                seasonalityMenu.run();
             }
             case 2 -> {
-                System.out.println("Option 2!");
+                CommunicationChannelMenu communicationChannelMenu = new CommunicationChannelMenu(clients);
+                communicationChannelMenu.run();
             }
             case 3 -> {
-                System.out.println("Option 3!");
+                PaymentMethodMenu paymentMethodMenu = new PaymentMethodMenu(clients);
+                paymentMethodMenu.run();
             }
             case 4 -> {
-                System.out.println("Option 4!");
+                ClientScoreMenu clientScoreMenu = new ClientScoreMenu(clients);
+                clientScoreMenu.run();
             }
             default ->
                     System.out.println("An unknown error has occurred. Please restart Hotel H2U Application, and try again.");
