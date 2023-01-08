@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class MainMenu implements Menu {
     private int option;
     private boolean exit;
-    private List<Client> clients;
+    protected List<Client> clients;
 
     public MainMenu() {
     }
