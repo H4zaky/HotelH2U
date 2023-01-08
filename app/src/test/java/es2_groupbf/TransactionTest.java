@@ -20,7 +20,7 @@ public class TransactionTest {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
         try {
-            date = dateFormat.parse("23/05/18");
+            date = dateFormat.parse("23/05/2018");
         } catch (ParseException exception) {
             exception.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class TransactionTest {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
 
         try {
-            date = dateFormat.parse("23/05/18");
+            date = dateFormat.parse("23/05/2018");
         } catch (ParseException exception) {
             exception.printStackTrace();
         }
