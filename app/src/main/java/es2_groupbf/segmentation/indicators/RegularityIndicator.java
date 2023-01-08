@@ -1,18 +1,13 @@
 package es2_groupbf.segmentation.indicators;
 
-import es2_groupbf.Util;
 import es2_groupbf.entities.Transaction;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
-public class RegularityIndicator {
-    public Integer calculate(Iterable<Transaction> transactions) throws ParseException {
+public class RegularityIndicator implements Indicator<Integer> {
+    @Override
+    public Integer calculateIndicator(Iterable<Transaction> transactions) {
         Date purchaseDate = null, todayDate = new Date();
 
         for (Transaction transaction : transactions) {
