@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CommunicationChannels {
+public class CommunicationChannel {
     public static String getMostUsedCommunicationChannel(List<Client> clients) {
         Map<String, Integer> channelCount = new HashMap<>();
 

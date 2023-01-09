@@ -5,13 +5,14 @@ import es2_groupbf.entities.Client;
 import java.util.Comparator;
 import java.util.List;
 
-public class MonetizationScore {
+public class MonetizationScore implements Score {
     private List<Client> sort(List<Client> clients) {
         clients.sort(Comparator.comparing(Client::getMonetization));
         return clients;
     }
 
-    public void calculate(List<Client> clients) {
+    @Override
+    public void calculateScore(List<Client> clients) {
         clients = sort(clients);
 
         int numberClients = clients.size();

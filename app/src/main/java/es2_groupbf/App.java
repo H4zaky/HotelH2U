@@ -2,15 +2,13 @@ package es2_groupbf;
 
 import es2_groupbf.entities.Client;
 import es2_groupbf.entities.Transaction;
+import es2_groupbf.menus.MainMenu;
 import es2_groupbf.segmentation.indicators.MonetizationIndicator;
 import es2_groupbf.segmentation.indicators.RegularityIndicator;
 import es2_groupbf.segmentation.indicators.TotalPurchasesIndicator;
 import es2_groupbf.segmentation.scores.MonetizationScore;
 import es2_groupbf.segmentation.scores.RegularityScore;
 import es2_groupbf.segmentation.scores.TotalPurchasesScore;
-import me.tongfei.progressbar.ProgressBar;
-import me.tongfei.progressbar.ProgressBarBuilder;
-import me.tongfei.progressbar.ProgressBarStyle;
 
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -30,9 +28,8 @@ public class App {
 
             calculateScores(clients);
 
-            Thread.sleep(2500);
-
-            new Menu().run();
+            MainMenu menu = new MainMenu(clients);
+            menu.run();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -62,15 +59,15 @@ public class App {
 
     private static void setIndicatorsForClients(List<Client> clients) throws ParseException {
         for (Client client : clients) {
-            client.setMonetization(new MonetizationIndicator().calculate(client.getTransactions()));
-            client.setRegularity(new RegularityIndicator().calculate(client.getTransactions()));
-            client.setTotalPurchases(new TotalPurchasesIndicator().calculate(client.getTransactions()));
+            client.setMonetization(new MonetizationIndicator().calculateIndicator(client.getTransactions()));
+            client.setRegularity(new RegularityIndicator().calculateIndicator(client.getTransactions()));
+            client.setTotalPurchases(new TotalPurchasesIndicator().calculateIndicator(client.getTransactions()));
         }
     }
 
     private static void calculateScores(List<Client> clients) {
-        new MonetizationScore().calculate(clients);
-        new RegularityScore().calculate(clients);
-        new TotalPurchasesScore().calculate(clients);
+        new MonetizationScore().calculateScore(clients);
+        new RegularityScore().calculateScore(clients);
+        new TotalPurchasesScore().calculateScore(clients);
     }
 }

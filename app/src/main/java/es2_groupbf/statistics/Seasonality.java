@@ -12,11 +12,17 @@ public class Seasonality {
         int month = date.getMonthValue();
         int day = date.getDayOfMonth();
 
-        if ((month == 3 && day >= 21) || (month == 4) || (month == 5 && day <= 20)) return "Spring";
-        if ((month == 6 && day >= 21) || (month == 7) || (month == 8 && day <= 20)) return "Summer";
-        if ((month == 9 && day >= 21) || (month == 10) || (month == 11 && day <= 20)) return "Autumn";
-        if ((month == 12 && day >= 21) || (month == 1) || (month == 2 && day <= 20)) return "Winter";
-        return "Invalid date";
+        return switch (month) {
+            case 3 -> day >= 21 ? "Spring" : "Winter";
+            case 4, 5 -> "Spring";
+            case 6 -> day >= 21 ? "Summer" : "Spring";
+            case 7, 8 -> "Summer";
+            case 9 -> day >= 21 ? "Autumn" : "Summer";
+            case 10, 11 -> "Autumn";
+            case 12 -> day >= 21 ? "Winter" : "Autumn";
+            case 1, 2 -> "Winter";
+            default -> "Invalid date";
+        };
     }
 
     public static String getMostInterestingSeasonPerClient(Client client) {

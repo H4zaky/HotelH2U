@@ -38,9 +38,6 @@ dependencies {
 
     // Use OpenCSV csv parser.
     implementation 'com.opencsv:opencsv:5.7.1'
-
-    // Use ProgressBar loading bar.
-    implementation 'me.tongfei:progressbar:0.9.5'
 }
 
 application {

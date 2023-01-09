@@ -2,10 +2,9 @@ package es2_groupbf.segmentation.indicators;
 
 import es2_groupbf.entities.Transaction;
 
-import java.util.ArrayList;
-
-public class MonetizationIndicator {
-    public Double calculate(Iterable<Transaction> transactions) {
+public class MonetizationIndicator implements Indicator<Double> {
+    @Override
+    public Double calculateIndicator(Iterable<Transaction> transactions) {
         double sum = 0;
 
         for (Transaction transaction : transactions) {
